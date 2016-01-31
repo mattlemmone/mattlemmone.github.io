@@ -1,1 +1,73 @@
-#list-container-left span{position:absolute;top:33%;left:4%;font-size:2.2vmax}#list-container-right{position:absolute;height:60%;width:5%;right:0;bottom:18%}#logo-list-right{float:right;height:100%;margin-right:36%}#logo-list-right li{display:block;margin-bottom:5.4vmax;font-size:2.2vmax}#console-container{position:relative;height:60%;width:70%;top:33%;left:15%;font-family:'Ubuntu Mono';font-size:1.3vmax}#console-log-container{position:relative;height:95%;width:100%;overflow:hidden}#footer,#name{position:absolute}#name{top:10%;left:4%}#name-text{font-size:1.9vmax;letter-spacing:.9vmax}#name-subtext{font-size:.9vmax;letter-spacing:.25vmax;text-align:center}#footer{width:96%;left:2%;bottom:5px}.footer{display:inline;font-size:.7vmax;text-transform:uppercase}
+#list-container-left span {
+    position: absolute;
+    top: 33%;
+    left: 4%;
+    font-size: 2.2vmax
+}
+
+#list-container-right {
+    position: fixed;
+    right: 0;
+    top: 35%;
+}
+
+#logo-list-right {
+    float: right;
+    margin-right: 36%
+}
+
+#logo-list-right li {
+    display: block;
+    margin-bottom: 4vh;
+    font-size: 4vh;
+}
+
+#console-container {
+    position: relative;
+    height: 60%;
+    width: 70%;
+    top: 33%;
+    left: 15%;
+    font-family: 'Ubuntu Mono';
+    font-size: 1.3vmax
+}
+
+#console-log-container {
+    position: relative;
+    height: 95%;
+    width: 100%;
+    overflow: hidden
+}
+
+#footer,
+#name {
+    position: absolute
+}
+
+#name {
+    top: 10%;
+    left: 4%
+}
+
+#name-text {
+    font-size: 1.9vmax;
+    letter-spacing: .9vmax
+}
+
+#name-subtext {
+    font-size: .9vmax;
+    letter-spacing: .25vmax;
+    text-align: center
+}
+
+#footer {
+    width: 96%;
+    left: 2%;
+    bottom: 5px
+}
+
+.footer {
+    display: inline;
+    font-size: .7vmax;
+    text-transform: uppercase
+}
