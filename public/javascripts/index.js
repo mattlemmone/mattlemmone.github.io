@@ -74,7 +74,7 @@ function gitInfo() {
     $.getJSON('https://api.github.com/users/mattlemmone/repos', function(data) {
         for (repo in data) {
             var name = data[repo].name,
-                 url = data[repo].url
+                 url = data[repo].html_url
             desc = data[repo].description;
             name = str_to_anchor(name, url);
             desc ? print_to_console(name + ' - ' + desc) : print_to_console(name);
