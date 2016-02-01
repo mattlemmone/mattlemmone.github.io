@@ -1,8 +1,9 @@
+var b = "about, music, hire, help, github";
+
 function eval_input(a) {
     a = a.trim();
     if ("" != a) {
         print_to_console(a, null, !0), a = a.toLowerCase();
-        var b = "about, music, hire, help, github";
         switch (a) {
             case "hi":
             case "hello":
@@ -74,7 +75,7 @@ function gitInfo() {
     $.getJSON('https://api.github.com/users/mattlemmone/repos', function(data) {
         for (repo in data) {
             var name = data[repo].name,
-                 url = data[repo].html_url
+                url = data[repo].html_url
             desc = data[repo].description;
             name = str_to_anchor(name, url);
             desc ? print_to_console(name + ' - ' + desc) : print_to_console(name);
@@ -99,8 +100,9 @@ function print_to_console(a, b, c) {
         $(this).append('<li class="sys-text animated fadeInUp"> > ' + a + " </li>"), b()
     })
 }
+
 $(document).ready(function() {
-    print_to_console("Please type a command, or type 'help'.", 100), $("#console-entry").focus(), $("#console-log-container").click(function() {
+    parse_and_print("Please type a command.\nTry: " + b, 100), $("#console-entry").focus(), $("#console-log-container").click(function() {
         $("#console-entry").focus()
     }), $("#console-entry").keydown(function(a) {
         13 == a.which && (eval_input($("#console-entry").val()), $("#console-entry").val(""))
