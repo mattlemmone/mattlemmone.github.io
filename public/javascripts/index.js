@@ -78,10 +78,10 @@ function gitInfo() {
                 url = data[repo].html_url,
                 lastUpdate = data[repo].updated_at,
                 desc = data[repo].description,
-                name = str_to_anchor(name, url),
-                str = name + ' - ' + desc + " Last update: " + lastUpdate;
+                name = str_to_anchor(name, url);
+            if (desc[desc.length - 1] != ".") desc += "."
+            var str = name + ' - ' + desc + " Last update @ " + lastUpdate;
             print_to_console(str);
-
         }
     });
 }
