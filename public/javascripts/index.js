@@ -75,10 +75,18 @@ function gitInfo() {
     $.getJSON('https://api.github.com/users/mattlemmone/repos', function(data) {
         for (repo in data) {
             var name = data[repo].name,
-                url = data[repo].html_url
-            desc = data[repo].description;
-            name = str_to_anchor(name, url);
-            desc ? print_to_console(name + ' - ' + desc) : print_to_console(name);
+                url = data[repo].html_url,
+                lastUpdate = data[repo].updated_at,
+                language = data[repo].language,
+                desc = data[repo].description,
+                name = str_to_anchor(name, url);
+            if (language === "null")
+                language = "";
+            else
+                language += ".";
+            var str = name + ' - ' + desc + language + "Last update: " + lastUpdate;
+            print_to_console(str);
+
         }
     });
 }
@@ -102,7 +110,7 @@ function print_to_console(a, b, c) {
 }
 
 $(document).ready(function() {
-    parse_and_print("Please type a command.\nTry: " + b, 100), $("#console-entry").focus(), $("#console-log-container").click(function() {
+    print_to_console("Please type a command. Try: " + b + ".", 100), $("#console-entry").focus(), $("#console-log-container").click(function() {
         $("#console-entry").focus()
     }), $("#console-entry").keydown(function(a) {
         13 == a.which && (eval_input($("#console-entry").val()), $("#console-entry").val(""))
