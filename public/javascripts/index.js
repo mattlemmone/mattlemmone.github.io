@@ -77,14 +77,9 @@ function gitInfo() {
             var name = data[repo].name,
                 url = data[repo].html_url,
                 lastUpdate = data[repo].updated_at,
-                language = data[repo].language,
                 desc = data[repo].description,
-                name = str_to_anchor(name, url);
-            if (language === "null")
-                language = "";
-            else
-                language += ".";
-            var str = name + ' - ' + desc + language + "Last update: " + lastUpdate;
+                name = str_to_anchor(name, url),
+                str = name + ' - ' + desc + " Last update: " + lastUpdate;
             print_to_console(str);
 
         }
