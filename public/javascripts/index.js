@@ -20,7 +20,7 @@ function eval_input(a) {
                 print_to_console('Let\'s assume you meant "about"...');
             case "about ":
             case "about":
-                a = "I am a 22 year old student working towards a bachelor's degree in Computer Engineering with hands-on experience in developing and designing code to solve problems for fellow end-users, and to ultimately focus on the extraordinary integration of technology with the real world.\nI am passionate about the ideas of software engineering - understanding the intricacies behind both hardware and software, and applying innovative and critical thinking to ensure all operations are performed with great finesse, clarity, and success.\nCurrently engaged in the University of Florida's computer engineering curriculum involving programming concepts, applications of methodologies from Java, C, C++, data structuring, algorithm analyzation, computer architecture, as well as extensive lab work with all of the above.\nIndependently, I study Python, JavaScript, PHP, C#, as well as some of their respective web frameworks (Nodejs, Django, WordPress). I am also experienced with front-end developement via HTML and CSS.", parse_and_print(a, null, !0);
+                a = "I am a 23 year old student working towards a bachelor's degree in Computer Engineering with hands-on experience in developing and designing code to solve problems for fellow end-users, and to ultimately focus on the extraordinary integration of technology with the real world.\nI am passionate about the ideas of software engineering - understanding the intricacies behind both hardware and software, and applying innovative and critical thinking to ensure all operations are performed with great finesse, clarity, and success.\nCurrently engaged in the University of Florida's computer engineering curriculum involving programming concepts, applications of methodologies from Java, C, C++, data structures, algorithm analyzation, computer architecture, as well as extensive lab work with all of the above.\nIndependently, I study Python, JavaScript, PHP, C#, as well as some of their respective web frameworks (Nodejs, Django, WordPress). I am also experienced with front-end developement via HTML and CSS.", parse_and_print(a, null, !0);
                 break;
             case "musci":
             case "musi":
@@ -35,7 +35,7 @@ function eval_input(a) {
                 print_to_console('Let\'s assume you meant "hire"...');
             case "hire ":
             case "hire":
-                a = 'I freelance online on ' + str_to_anchor("upWork", "https://www.upwork.com/o/profiles/users/_~01c2b5c65e1e534f28/") + '. Need a program, script, or website? Contact me if you are interested in negotiating a job.', print_to_console(a);
+                a = 'I freelance online on ' + "upWork".link("https://www.upwork.com/o/profiles/users/_~01c2b5c65e1e534f28/") + '. Need a program, script, or website? Contact me if you are interested in negotiating a job.', print_to_console(a);
                 break;
             case "help ":
             case "help":
@@ -69,7 +69,7 @@ function gitInfo() {
             url = data.html_url,
             numRepos = data.public_repos,
             lastUpdate = data.updated_at,
-            msg = 'I currently have ' + numRepos + ' repositories and ' + numFollowers + ' followers on ' + str_to_anchor("GitHub", url) + '.\nLast update: ' + lastUpdate + '.';
+            msg = 'I currently have ' + numRepos + ' repositories and ' + numFollowers + ' followers on ' + "GitHub".link(url) + '.\nLast update: ' + lastUpdate + '.';
         print_to_console(msg);
     });
     $.getJSON('https://api.github.com/users/mattlemmone/repos', function(data) {
@@ -78,7 +78,7 @@ function gitInfo() {
                 url = data[repo].html_url,
                 lastUpdate = data[repo].updated_at,
                 desc = data[repo].description,
-                name = str_to_anchor(name, url);
+                name = name.link(url);
             if (desc[desc.length - 1] != ".") desc += "."
             var str = name + ' - ' + desc + " Last update @ " + lastUpdate;
             print_to_console(str);
@@ -86,9 +86,6 @@ function gitInfo() {
     });
 }
 
-function str_to_anchor(str, url) {
-    return '<a href="' + url + '">' + str + '</a>';
-}
 
 function parse_and_print(a, b, c) {
     b || (b = ".");
@@ -105,10 +102,39 @@ function print_to_console(a, b, c) {
 }
 
 $(document).ready(function() {
-    print_to_console("Please type a command. Try: " + b + ".", 100), $("#console-entry").focus(), $("#console-log-container").click(function() {
+    var keys = {
+        enter: 13,
+        up: 38,
+        down: 40
+    };
+    
+    $("#console-container").bind('mousewheel', function(event) {
+    	var dir = {
+    		up: -1,
+    		down: 1
+    	}
+        var direction = event.originalEvent.wheelDelta > 0 ? dir.up : dir.down;
+        var oldBot = parseInt($("#console-log").css("bottom"));
+        var inc = 30 * direction;
+
+        var contH = $("#console-log-container").height();
+        var logH = $("#console-log").height();
+        var isOverlap = logH - contH > 0;
+        var overLapGap = logH - contH + oldBot;
+        var atTop = overLapGap < 10;
+        var atBot = oldBot == 0;
+
+        if (!isOverlap) return;
+        if (atTop && direction == dir.up) return;
+        if (atBot && direction == dir.down) return;
+
+        $("#console-log").css("bottom", oldBot + inc);
+    });
+
+    print_to_console("Please type a command. Try: " + b + ".", 100), $("#console-entry").focus(), $(document).click(function() {
         $("#console-entry").focus()
     }), $("#console-entry").keydown(function(a) {
-        13 == a.which && (eval_input($("#console-entry").val()), $("#console-entry").val(""))
+        keys.enter == a.which && (eval_input($("#console-entry").val()), $("#console-entry").val(""))
     }), $("#mail").click(function() {
         window.location.href = "mailto:mattlemmone@gmail.com"
     }), $("#git").click(function() {
