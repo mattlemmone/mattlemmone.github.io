@@ -102,17 +102,41 @@ function print_to_console(a, b, c) {
 }
 
 $(document).ready(function() {
-    var keys = {
+    var key = {
         enter: 13,
         up: 38,
-        down: 40
+        down: 40       
     };
-    
-    $("#console-container").bind('mousewheel', function(event) {
-    	var dir = {
-    		up: -1,
-    		down: 1
+    var history = [];
+    var idx = 0;
+    $("#console-entry").keydown(function(a) {
+    	switch (a.which){
+    		case key.enter:
+    			var input = $("#console-entry").val()
+    			if (input != ""){
+    				eval_input(input);
+    				history.push(input);
+    				idx = history.length;
+    			}
+    			$("#console-entry").val("");
+    			break;
+    		case key.up:    			
+    			var input = idx >= 0 ? history[--idx] : "";
+    			$("#console-entry").val(input);
+    			break;
+    		case key.down:    			
+    			var input = idx <= history.length - 1? history[++idx] : "";
+    			$("#console-entry").val(input);
+    			break;
     	}
+    });
+
+
+    $("#console-container").bind('mousewheel', function(event) {
+        var dir = {
+            up: -1,
+            down: 1
+        }
         var direction = event.originalEvent.wheelDelta > 0 ? dir.up : dir.down;
         var oldBot = parseInt($("#console-log").css("bottom"));
         var inc = 30 * direction;
@@ -133,8 +157,6 @@ $(document).ready(function() {
 
     print_to_console("Please type a command. Try: " + b + ".", 100), $("#console-entry").focus(), $(document).click(function() {
         $("#console-entry").focus()
-    }), $("#console-entry").keydown(function(a) {
-        keys.enter == a.which && (eval_input($("#console-entry").val()), $("#console-entry").val(""))
     }), $("#mail").click(function() {
         window.location.href = "mailto:mattlemmone@gmail.com"
     }), $("#git").click(function() {
